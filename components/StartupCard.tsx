@@ -4,7 +4,20 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from './ui/button';
 
-const StartupCard = ({ post }) => {
+interface Props {
+  post: {
+    _id: number;
+    title: string;
+    category: string;
+    description: string;
+    image: string;
+    _createdAt: Date;
+    views: number;
+    author: { _id: number; name: string };
+  };
+}
+
+const StartupCard = ({ post }: Props) => {
   const {
     _id,
     title,
