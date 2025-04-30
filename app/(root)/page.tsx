@@ -1,3 +1,4 @@
+import { auth } from '@/auth';
 import SearchForm from '@/components/SearchForm';
 import StartupCard, { StartupTypeCard } from '@/components/StartupCard';
 
@@ -11,6 +12,10 @@ const HomePage = async ({
 }) => {
   const { query } = await searchParams;
   const params = { search: query || null };
+
+  const session = await auth();
+
+  console.log(session);
 
   const { data: posts } = await sanityFetch({ query: STARTUPS_QUERY, params });
 
