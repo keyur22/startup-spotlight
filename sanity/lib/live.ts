@@ -1,3 +1,4 @@
+import 'server-only';
 import { createClient, defineLive } from 'next-sanity';
 
 const client = createClient({
