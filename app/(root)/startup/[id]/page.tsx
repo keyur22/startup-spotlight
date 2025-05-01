@@ -14,7 +14,11 @@ import { Suspense } from 'react';
 
 const md = markdownit();
 
-const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
+const StartupDetailPage = async ({
+  params
+}: {
+  params: Promise<{ id: string }>;
+}) => {
   const { id } = await params;
 
   const post = await client.fetch<StartupTypeCard>(STARTUP_BY_ID_QUERY, { id });
@@ -91,4 +95,4 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   );
 };
 
-export default Page;
+export default StartupDetailPage;
