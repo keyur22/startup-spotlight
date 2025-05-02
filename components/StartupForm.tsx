@@ -18,7 +18,6 @@ const StartupForm = () => {
   const router = useRouter();
   const { toast } = useToast();
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleFormSubmit = async (prevState: any, formData: FormData) => {
     try {
       const formValues = {
