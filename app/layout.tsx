@@ -56,7 +56,8 @@ const workSans = localFont({
 
 export const metadata: Metadata = {
   title: 'Startup Spotlight',
-  description: 'Pitch, Vote and Grow'
+  description:
+    'A platform where entrepreneurs can submit their startup ideas for virtual pitch competitions and explore other pitches.'
 };
 
 export default function RootLayout({
