@@ -1,5 +1,6 @@
 import { auth } from '@/auth';
 import StartupForm from '@/components/StartupForm';
+import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 
 const StartupCreatePage = async () => {
@@ -16,6 +17,10 @@ const StartupCreatePage = async () => {
       <StartupForm />
     </>
   );
+};
+
+export const metadata: Metadata = {
+  title: 'Startup Spotlight - Submit Your Startup'
 };
 
 export default StartupCreatePage;

@@ -8,6 +8,7 @@ import {
   STARTUP_BY_ID_QUERY
 } from '@/sanity/lib/queries';
 import markdownit from 'markdown-it';
+import { Metadata, ResolvingMetadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -17,15 +18,15 @@ import { Suspense } from 'react';
 
 const md = markdownit();
 
-const StartupDetailPage = async ({
-  params
-}: {
+type Props = {
   params: Promise<{ id: string }>;
-}) => {
+};
+
+const StartupDetailPage = async ({ params }: Props) => {
   const { id } = await params;
 
   const [post, { select: editorPosts }] = await Promise.all([
-    client.fetch(STARTUP_BY_ID_QUERY, { id }),
+    client.fetch<StartupTypeCard>(STARTUP_BY_ID_QUERY, { id }),
     client.fetch(CATEGORY_BY_SLUG_QUERY, {
       slug: 'editor-picks'
     })
@@ -52,9 +53,9 @@ const StartupDetailPage = async ({
           <Image
             src={image}
             alt='thumbnail'
-            className='w-full h-auto rounded-xl'
+            className='md:w-3/5 lg:w-2/5 h-auto rounded-xl mx-auto overflow-hidden'
             width={500}
-            height={250}
+            height={400}
           />
         )}
 
@@ -86,7 +87,7 @@ const StartupDetailPage = async ({
           <h3 className='text-30-bold'>Pitch Details</h3>
           {parsedContent ? (
             <article
-              className='prose max-w-4xl font-work-sans break-all'
+              className='prose max-w-4xl font-work-sans break-words'
               dangerouslySetInnerHTML={{ __html: parsedContent }}
             />
           ) : (
@@ -115,5 +116,24 @@ const StartupDetailPage = async ({
     </>
   );
 };
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const { id } = await params;
+
+  const post = await client.fetch<StartupTypeCard>(STARTUP_BY_ID_QUERY, { id });
+
+  const previousImages = (await parent).openGraph?.images || [];
+
+  return {
+    title: `Startup Spotlight - ${post.title}`,
+    description: post.description,
+    openGraph: {
+      images: [post.image!, ...previousImages]
+    }
+  };
+}
 
 export default StartupDetailPage;

@@ -3,15 +3,21 @@ import { StartupCardSkeleton } from '@/components/StartupCard';
 import UserStartups from '@/components/UserStartups';
 import { client } from '@/sanity/lib/client';
 import { AUTHOR_BY_ID_QUERY } from '@/sanity/lib/queries';
+import { Author } from '@/sanity/types';
+import { Metadata, ResolvingMetadata } from 'next';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 
-const UserPage = async ({ params }: { params: Promise<{ id: string }> }) => {
+type Props = {
+  params: Promise<{ id: string }>;
+};
+
+const UserPage = async ({ params }: Props) => {
   const { id } = await params;
   const session = await auth();
 
-  const user = await client.fetch(AUTHOR_BY_ID_QUERY, { id });
+  const user = await client.fetch<Author>(AUTHOR_BY_ID_QUERY, { id });
 
   if (!user) return notFound();
 
@@ -26,8 +32,8 @@ const UserPage = async ({ params }: { params: Promise<{ id: string }> }) => {
           </div>
 
           <Image
-            src={user.image}
-            alt={user.name}
+            src={user.image || 'https://placehold.co/220'}
+            alt={user.name || ''}
             width={220}
             height={220}
             className='profile_image'
@@ -53,5 +59,24 @@ const UserPage = async ({ params }: { params: Promise<{ id: string }> }) => {
     </>
   );
 };
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const { id } = await params;
+
+  const user = await client.fetch<Author>(AUTHOR_BY_ID_QUERY, { id });
+
+  const previousImages = (await parent).openGraph?.images || [];
+
+  return {
+    title: `Startup Spotlight - ${user.name}`,
+    description: user.bio,
+    openGraph: {
+      images: [user.image!, ...previousImages]
+    }
+  };
+}
 
 export default UserPage;
