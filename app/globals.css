@@ -48,7 +48,7 @@
   }
 
   .pink_container {
-    @apply w-full bg-primary min-h-[530px] pattern flex justify-center items-center flex-col py-10 px-6;
+    @apply w-full bg-primary min-h-[530px] pattern flex justify-center items-center flex-col py-10 px-4 md:px-6;
   }
 
   .tag {
@@ -56,7 +56,7 @@
   }
 
   .heading {
-    @apply uppercase bg-black px-6 py-3 font-work-sans font-extrabold text-white sm:text-[54px] sm:leading-[64px] text-[36px] leading-[46px] max-w-5xl text-center my-5;
+    @apply uppercase bg-black px-6 py-3 font-work-sans font-extrabold text-white sm:text-[54px] sm:leading-[64px] text-[34px] leading-[46px] max-w-5xl text-center my-5;
   }
 
   .sub-heading {
@@ -64,7 +64,7 @@
   }
 
   .section_container {
-    @apply px-6 py-10 max-w-7xl mx-auto;
+    @apply px-4 md:px-6 py-10 max-w-7xl mx-auto;
   }
 
   .card_grid {
@@ -81,7 +81,7 @@
 
   /* profile */
   .profile_container {
-    @apply w-full pb-10 pt-20 px-6 max-w-7xl mx-auto lg:flex-row flex-col flex gap-10;
+    @apply w-full pb-10 pt-20 px-4  md:px-6 max-w-7xl mx-auto lg:flex-row flex-col flex gap-10;
   }
 
   .profile_card {
@@ -120,7 +120,7 @@
 
   /* searchform */
   .search-form {
-    @apply max-w-3xl w-full min-h-[80px] bg-white border-[5px] border-black rounded-[80px] text-[24px] mt-8 px-5 flex flex-row items-center gap-5;
+    @apply max-w-3xl w-full min-h-[70px] md:min-h-[80px] bg-white border-[5px] border-black rounded-[80px] text-[20px] md:text-[24px] mt-8 px-5 flex flex-row items-center gap-4 md:gap-5;
   }
 
   .search-input {
@@ -128,7 +128,7 @@
   }
 
   .search-btn {
-    @apply size-[50px] rounded-full bg-black flex justify-center items-center !important;
+    @apply size-[40px] md:size-[50px] rounded-full bg-black flex justify-center items-center !important;
   }
 
   /* startupcard */
@@ -158,7 +158,7 @@
 
   /* startupform */
   .startup-form {
-    @apply max-w-2xl mx-auto bg-white my-10 space-y-8 px-6;
+    @apply max-w-2xl mx-auto bg-white my-10 space-y-8 px-4 md:px-6;
   }
 
   .startup-form_label {
