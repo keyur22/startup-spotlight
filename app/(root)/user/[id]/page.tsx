@@ -71,10 +71,10 @@ export async function generateMetadata(
   const previousImages = (await parent).openGraph?.images || [];
 
   return {
-    title: `Startup Spotlight - ${user.name}`,
-    description: user.bio,
+    title: `Startup Spotlight - ${user?.name}`,
+    description: user?.bio,
     openGraph: {
-      images: [user.image!, ...previousImages]
+      images: user?.image ? [user?.image, ...previousImages] : previousImages
     }
   };
 }
