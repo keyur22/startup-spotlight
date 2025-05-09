@@ -90,7 +90,7 @@
   }
 
   .profile_image {
-    @apply rounded-full object-cover border-[3px] border-black;
+    @apply rounded-full object-cover border-[3px] border-black h-[220px];
   }
 
   /* idea details */
